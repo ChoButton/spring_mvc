@@ -67,9 +67,12 @@ public class ScoreController {
     }
     // 3. 성적 정보 삭제 요청
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public String remove(){
+    public String remove(Model model, int studentNumber){
         System.out.println("/score/remove : POST방식");
-        return "";
+        System.out.println("전달받은 학번 : " + studentNumber);
+        // 글 삭제 후 list페이지로 넘어가도록 아래코드를 작성하고 수정해주세요
+        repository.deleteByStudentNumber(studentNumber);
+        return "redirect:/score/list";
     }
     // 4. 상세 성적 조회
     @RequestMapping(value = "/detail", method = RequestMethod.GET)

@@ -8,37 +8,40 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-    <h1>입력된 학생의 성적</h1>
-    <teble class="table">
-     <c:forEach var="score" items="${score}">
-        <thead>
-            <tr>
-                <th>학번</th>
-                <th>이름</th>
-                <th>국어</th>
-                <th>수학</th>
-                <th>영어</th>
-                <th>총점</th>
-                <th>평균</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr>
-              <td>${score.studentNumber}</td>
-              <td>${score.name}</td>
-              <td>${score.korScore}</td>
-              <td>${score.mathScore}</td>
-              <td>${score.engScore}</td>
-              <td>${score.korScore + score.mathScore + score.engScore}</td>
-              <td>${(score.korScore + score.mathScore + score.engScore) / 3}</td>
-         </tr>
-     </c:forEach>
-    </tbody>
-    </teble>
-    <form accept="/score/list" method="POST">
-        <input type="button" value="목록">
-    </form>
-    <div class="container">
+<div class="container">
+<h1>${score.studentNumber}번 학생 성적정보</h1>
+<table class="table table-hover">
+        <tr>
+            <td>이름</td>
+            <td>${score.name}</td>
+        </tr>
+        <tr>
+            <th>국어</th>
+            <th>${score.korScore}점</th>
+        </tr>
+        <tr>
+            <th>수학</th>
+            <th>${score.mathScore}점</th>
+        </tr>
+        <tr>
+            <th>영어</th>
+            <th>${score.engScore}점</th>
+        </tr>
+        <tr>
+            <th>총점</th>
+            <th>${score.engScore + score.korScore + score.mathScore}점</th>
+        </tr>
+        <tr>
+            <th>평균</th>
+            <th>${(score.engScore + score.korScore + score.mathScore) / 3}점</th>
+        </tr>
+</table>
+        <a href="/score/list" class="btn btn-primary">목록으로 돌아가기</a>
+        <form action="/score/remove" method="POST">
+            <input type="hidden" name="studentNumber" value="${score.studentNumber}">
+            <input type="submit" class="btn btn-secondary" value="삭제하기">
+        </form>
+
+</div>
 </body>
 </html>
